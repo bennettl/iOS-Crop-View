@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "410B38371863824400970B6A"
-               BuildableName = "BlurTest.app"
-               BlueprintName = "BlurTest"
-               ReferencedContainer = "container:BlurTest.xcodeproj">
+               BuildableName = "BLCropView.app"
+               BlueprintName = "BLCropView"
+               ReferencedContainer = "container:BLCropView.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "410B385B1863824400970B6A"
-               BuildableName = "BlurTestTests.xctest"
-               BlueprintName = "BlurTestTests"
-               ReferencedContainer = "container:BlurTest.xcodeproj">
+               BuildableName = "BLCropViewTests.xctest"
+               BlueprintName = "BLCropViewTests"
+               ReferencedContainer = "container:BLCropView.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "410B38371863824400970B6A"
-            BuildableName = "BlurTest.app"
-            BlueprintName = "BlurTest"
-            ReferencedContainer = "container:BlurTest.xcodeproj">
+            BuildableName = "BLCropView.app"
+            BlueprintName = "BLCropView"
+            ReferencedContainer = "container:BLCropView.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "410B38371863824400970B6A"
-            BuildableName = "BlurTest.app"
-            BlueprintName = "BlurTest"
-            ReferencedContainer = "container:BlurTest.xcodeproj">
+            BuildableName = "BLCropView.app"
+            BlueprintName = "BLCropView"
+            ReferencedContainer = "container:BLCropView.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -80,9 +80,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "410B38371863824400970B6A"
-            BuildableName = "BlurTest.app"
-            BlueprintName = "BlurTest"
-            ReferencedContainer = "container:BlurTest.xcodeproj">
+            BuildableName = "BLCropView.app"
+            BlueprintName = "BLCropView"
+            ReferencedContainer = "container:BLCropView.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

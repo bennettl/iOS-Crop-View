@@ -8,53 +8,38 @@
 
 #import "BLBlurView.h"
 
+
 @implementation BLBlurView
 
-@synthesize blurImageView;
+// Child of container view
+- (id)initWithImage:(UIImage *)image{
+    self = [super initWithImage:image];
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
     if (self) {
-        
-        self.blurImageView = [[UIImageView alloc] initWithFrame:frame];
-        self.blurImageView.layer.borderColor = [UIColor greenColor].CGColor;
-        self.blurImageView.layer.borderWidth = 10.0f;
-        [self addSubview:self.blurImageView];
-        [self.blurImageView setContentMode:UIViewContentModeScaleAspectFill];
-    
+        self.backgroundColor = [UIColor orangeColor];
+        [self setContentMode:UIViewContentModeScaleAspectFill];
     }
     return self;
 }
 
-- (id)initWithImage:(UIImage *)image
-{
-    self.blurImageView  = [[UIImageView alloc] initWithImage:image];
-    self                = [super initWithFrame:self.blurImageView.frame];
-    
-    if (self) {
-        [self addSubview:self.blurImageView];
-      //  [self.blurImageView setContentMode:UIViewContentModeCenter];
-    }
-    return self;
-}
+
 
 // Custom setter. Creates a blured version of image
--(void) setImage:(UIImage *) image
-{
+-(void) setImage:(UIImage *) image{
     CIImage *inputImage     = [[CIImage alloc] initWithImage:image] ;
-    CIFilter *blurFilter    = [CIFilter filterWithName:@"CISepiaTone"] ;
-//    CIGaussianBlur
+//       CIFilter *blurFilter    = [CIFilter filterWithName:@"CISepiaTone"] ;
+    CIFilter *blurFilter    = [CIFilter filterWithName:@"CIGaussianBlur"] ;
     [blurFilter setDefaults];
     
     [blurFilter setValue:inputImage forKey:@"inputImage"] ;
-//     [blurFilter setValue:[NSNumber numberWithFloat:0.2f] forKey:@"inputintensity"];
-//    [blurFilter setValue: [NSNumber numberWithFloat:4.0f] forKey:@"inputRadius"];
+    [blurFilter setValue: [NSNumber numberWithFloat:4.0f] forKey:@"inputRadius"];
     
     CIImage *outputImage    = [blurFilter valueForKey: @"outputImage"];
     CIContext *context      = [CIContext contextWithOptions:nil];
-    UIImage *blurred        = [UIImage imageWithCGImage:[context createCGImage:outputImage fromRect:outputImage.extent]];
-    self.blurImageView.image = blurred;
+    struct CGImage *cgImage = [context createCGImage:outputImage fromRect:outputImage.extent];
+    UIImage *blurred        = [UIImage imageWithCGImage:cgImage];
+    [super setImage:blurred];
+    CFRelease(cgImage);
 }
 
 @end

@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BLScrollView.h"
 
 @interface BLCropView : UIView
 
-@property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) BLScrollView *scrollView;
 
 @end

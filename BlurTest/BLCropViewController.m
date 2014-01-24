@@ -7,22 +7,26 @@
 //
 
 #import "BLCropViewController.h"
+#import "BLScrollView.h"
 #import "BLBlurView.h"
 #import "BLCropView.h"
+#import "BLContainerView.h"
+
 #import <QuartzCore/QuartzCore.h>
 
-#define IMAGE_NAME @"portrait"
-#define CROP_VIEW_WIDTH 100
-#define CROP_VIEW_HEIGHT 100
+//#define IMAGE_NAME @"portrait"
+#define IMAGE_NAME @"landscape"
+#define CROP_VIEW_WIDTH 240/2
+#define CROP_VIEW_HEIGHT 382/2
 
 @interface BLCropViewController () <UIScrollViewDelegate>
 
 @property (strong, nonatomic) BLCropView *cropView;
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (strong, nonatomic) UIView *containerView;
-@property (strong, nonatomic) UIImageView *imageView;
-@property (strong, nonatomic) BLBlurView *blurView;
+@property (strong, nonatomic) BLScrollView *scrollView;
+@property (strong, nonatomic) UIImage *image;
 
+@property CGPoint offsetPercentage;
+@property CGSize prevSize;
 @end
 
 @implementation BLCropViewController
@@ -33,29 +37,84 @@
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     // Sibings
-    [self setupCropView];
     [self setupScrollView];
-    [self adjustContainerView];
-    [self adjustImageViewMaskLayer];
+    [self setupCropView];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    [self setZoomScales];
+    CGSize padding                    = CGSizeMake(CGRectGetMaxX(self.cropView.frame), CGRectGetMaxY(self.cropView.frame));
+    self.scrollView.contentInset      = UIEdgeInsetsMake(padding.height, padding.width, padding.height, padding.width);
+    self.scrollView.contentSize        = self.scrollView.containerView.frame.size;
+    [self adjustImageViewMaskLayer];
     [self centerScrollView];
+    
+    
+    UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)];
+   //[self.view addGestureRecognizer:pinchGesture];
+    
+}
+
+
+
+-(void)handlePinch:(UIPinchGestureRecognizer*)pinch {
+    UIView *view = self.scrollView.containerView; //pinch.view.
+
+    // Cropfield center (0,0) means top left, acounts for increase image sie
+    CGPoint cropCenter = CGPointMake(self.scrollView.contentOffset.x + self.cropView.center.x,
+                                     self.scrollView.contentOffset.y + self.cropView.center.y);
+    
+    CGPoint anchorPoint = CGPointMake(MAX(cropCenter.x/self.scrollView.containerView.frame.size.width,0),
+                                      MAX(cropCenter.y/self.scrollView.containerView.frame.size.height,0));
+    
+    // 0.5, 0.5
+    CGPoint apb = CGPointMake(self.scrollView.containerView.layer.anchorPoint.x,
+                              self.scrollView.containerView.layer.anchorPoint.y);
+    
+    
+    self.scrollView.containerView.layer.anchorPoint = CGPointMake(1, 1);
+    // 0 ,0
+    CGPoint apa = CGPointMake(self.scrollView.containerView.layer.anchorPoint.x,
+                              self.scrollView.containerView.layer.anchorPoint.y);
+   // NSLog(@"anchor point %@", NSStringFromCGPoint(anchorPoint));
+    
+    view.frame = CGRectOffset(view.frame,
+                              view.frame.size.width * (apa.x- apb.x),
+                               view.frame.size.height * (apa.y- apb.y));
+    
+    self.scrollView.contentSize = view.frame.size;
+    view.transform = CGAffineTransformScale(view.transform, pinch.scale, pinch.scale);
+    
+    [view sizeToFit];
+    self.scrollView.contentSize = view.frame.size;
+   
+
+    pinch.scale = 1;
+    
+    
 }
 
 #pragma mark Setup Views
 
 - (void)setupScrollView{
-    UIImage *image = [UIImage imageNamed:IMAGE_NAME];
-    [self setupContainerViewWithImage:image]; // Child
+    // Init with image and padding
+    self.image      = [UIImage imageNamed:IMAGE_NAME];
+    self.scrollView = [[BLScrollView alloc] initWithImage:self.image];
+    
     [self addGestureRecgonizers];
-    [self setZoomScales];
+    
+    self.scrollView.delegate = self;
+   // self.scrollView.backgroundColor = [UIColor redColor];
+    
+    [self.view addSubview:self.scrollView];
+
 }
 
 // Note, this changes the width/height of containerView
 - (void)setZoomScales{
-    self.scrollView.contentSize         = self.imageView.frame.size;
+    self.scrollView.contentSize         = self.scrollView.containerView.imageView.frame.size;
     CGRect scrollViewFrame              = self.scrollView.frame;
     CGFloat scaleWidth                  = scrollViewFrame.size.width / self.scrollView.contentSize.width;
     CGFloat scaleHeight                 = scrollViewFrame.size.height / self.scrollView.contentSize.height;
@@ -68,90 +127,57 @@
 
 // Center white box
 - (void)setupCropView{
-    CGSize size = [[UIScreen mainScreen] bounds].size;     // Screen bounds
     // Configure size of cropview as you like
     self.cropView = [[BLCropView alloc] initWithFrame:CGRectMake(0,0,
-                                                             size.width / 2.0f,
-                                                             size.height / 2.0f)];
-    NSLog(@"WIDTH: %f, %f", size.width/2.0f, size.height/2.0f);
+                                                            CROP_VIEW_WIDTH,
+                                                            CROP_VIEW_HEIGHT)];
     self.cropView.backgroundColor       = [UIColor clearColor];
     self.cropView.layer.borderWidth     = 1.0f;
     self.cropView.layer.borderColor     = [UIColor blackColor].CGColor;
     self.cropView.layer.cornerRadius    = 6.0f;
     self.cropView.center                = self.view.center;
     // Forward scroll events to scrollView
-    self.cropView.scrollView            = self.scrollView;
     [self.view addSubview:self.cropView]; // view (parent of) scrollView
 //    NSLog(@"crop view %@", NSStringFromCGRect(self.cropView.frame));
 }
 
-// Childen of scrollView
-- (void)setupContainerViewWithImage:(UIImage *)image{
-    // Create a containerView (UIView) with image size/width
-    self.containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-    self.containerView.backgroundColor = [UIColor whiteColor];
-    // Setup children
-    [self setupBlurViewWithImage:image];
-    [self setupImageViewWithImage:image];
-    
-    [self.scrollView addSubview:self.containerView]; // scrollView (parent of) containerView
-//    NSLog(@"container view %@", NSStringFromCGRect(self.containerView.frame));
-}
-
-// Child of container view
-- (void)setupImageViewWithImage:(UIImage *)image{
-    // Create imageView (UIView) and set it's image to the same image as blurView
-    self.imageView                      = [[UIImageView alloc] initWithImage:image];
-    [self.imageView setImage:image];
-    self.imageView.center               = self.containerView.center;
-    [self.containerView addSubview:self.imageView]; // containerView (parent of) imageView
-//    NSLog(@"image view %@", NSStringFromCGRect(self.imageView.frame));
-}
-
-// Child of container view
-- (void)setupBlurViewWithImage:(UIImage *)image{
-    // Create blurView (UIView) and set it's image
-    self.blurView                       = [[BLBlurView alloc] initWithImage:image];
-    [self.blurView setImage:image];
-    self.blurView.center                = self.containerView.center;
-    [self.containerView addSubview:self.blurView]; // containerView (parent of) blurView
-//    NSLog(@"blur view %@", NSStringFromCGRect(self.blurView.frame));
-}
 
 #pragma mark Adjustments
 
+// Initially when the site inits, scroll view will be centered
 - (void)centerScrollView{
-    CGFloat zoomScale           = self.scrollView.zoomScale;
-    CGSize boundsSize           = self.scrollView.bounds.size;
-    CGRect scaledBlurViewRect   = CGRectMake(self.blurView.frame.origin.x * zoomScale,
-                                             self.blurView.frame.origin.y * zoomScale,
-                                             self.blurView.frame.size.width * zoomScale,
-                                             self.blurView.frame.size.height * zoomScale);
-    CGPoint contentOffset       = CGPointZero;
+    CGSize boundsSize               = self.scrollView.bounds.size;
+    CGRect blurViewRect             = self.scrollView.containerView.blurView.frame;
+    CGPoint contentOffset           = CGPointZero;
     
-    if (scaledBlurViewRect.size.width < boundsSize.width) {
+
+    if (blurViewRect.size.width * self.scrollView.zoomScale < boundsSize.width) {
         // Height of image + half of the difference between blur and cropview
-        contentOffset.x    = scaledBlurViewRect.size.width;
-        contentOffset.x   += (CGRectGetWidth(self.cropView.frame) - scaledBlurViewRect.size.width)/2.0f;
+       contentOffset.x     =  (boundsSize.width - (blurViewRect.size.width * self.scrollView.zoomScale))/2.0f;
+       contentOffset.x     *= -1;
+
     } else {
-        contentOffset.x = scaledBlurViewRect.origin.x;
+        // Offset zoomed by pushing scrollView to top left
+        contentOffset.x = blurViewRect.origin.x;
     }
     
-    if (scaledBlurViewRect.size.height < boundsSize.height) {
+    if (blurViewRect.size.height * self.scrollView.zoomScale  < boundsSize.height) {
         // Height of image + half of the difference between blur and cropview
-        contentOffset.y   = scaledBlurViewRect.size.height ;
-        contentOffset.y   += (CGRectGetHeight(self.cropView.frame) - scaledBlurViewRect.size.height)/2.0f;
+        contentOffset.y     =  (boundsSize.height - (blurViewRect.size.height * self.scrollView.zoomScale))/2.0f;
+        contentOffset.y     *= -1;
+
     } else {
-        contentOffset.y = scaledBlurViewRect.origin.y;
+        contentOffset.y = blurViewRect.origin.y;
     }
 
     self.scrollView.contentOffset = contentOffset;
+    NSLog(@"%@", NSStringFromCGPoint(self.scrollView.contentOffset));
 }
 
 // Center scroll view contents
 - (void)centerScrollViewContents {
     CGSize boundsSize = self.scrollView.bounds.size;
-    CGRect contentsFrame = self.containerView.frame;
+    CGRect contentsFrame = self.scrollView.containerView.frame;
     
     if (contentsFrame.size.width < boundsSize.width) {
         contentsFrame.origin.x = (boundsSize.width - contentsFrame.size.width) / 2.0f;
@@ -166,36 +192,6 @@
     }
 }
 
-// Adjust the containerView size base whenever the zoomScale changes to make sure there is appropriate padding surrounding
-- (void)adjustContainerView{
-    float scaleFactor               =  1/self.scrollView.zoomScale;
-    
-    float scaledCropViewWidth       = scaleFactor * CGRectGetMaxX(self.cropView.frame);
-    float scaledCropViewHeight      = scaleFactor * CGRectGetMaxY(self.cropView.frame);
-    float imageWidth                = self.blurView.blurImageView.frame.size.width ;
-    float imageHeight               = self.blurView.blurImageView.frame.size.height;
-    
-    float widthPadding =  2 * scaledCropViewWidth ;
-    float heightPadding =  2* scaledCropViewHeight ;
-    
-    // Reset container view frame and make sure imageView/blurView realigns with the new center
-    CGRect rect                                 = CGRectMake(0, 0,
-                                                             imageWidth + widthPadding,
-                                                             imageHeight + heightPadding);
-    CGSize inset                                = CGSizeMake(widthPadding/2 , heightPadding/2);
-    
-    self.containerView.frame                    = rect;
-    self.blurView.frame                         = CGRectInset(rect, inset.width, inset.height); // shrink by inset
-    self.blurView.blurImageView.frame           = CGRectMake(0, 0, self.blurView.frame.size.width, self.blurView.frame.size.height);
-    self.blurView.backgroundColor               = [UIColor brownColor];
-    self.blurView.blurImageView.backgroundColor = [UIColor greenColor];
-    
-    // aligns the imageView with blurView
-    self.imageView.frame = CGRectInset(rect, inset.width, inset.height);
-    
-    // Update scrollView content size
-    self.scrollView.contentSize = CGSizeMake(self.containerView.frame.size.width/scaleFactor, self.containerView.frame.size.height/scaleFactor);
-}
 
 // Adjust imageView layer mask to the same rect of the cropView everytime user scrolls
 - (void)adjustImageViewMaskLayer{
@@ -223,11 +219,11 @@
     float scaledCropViewY           = scaleFactor * CGRectGetMinY(self.cropView.frame);
     
     // Position mask it to top left origion (0,0) relative to containreView
-    maskLayer.frame = CGRectOffset(maskLayer.frame, -self.imageView.frame.origin.x , -self.imageView.frame.origin.y);
+    maskLayer.frame = CGRectOffset(maskLayer.frame, -self.scrollView.containerView.imageView.frame.origin.x , -self.scrollView.containerView.imageView.frame.origin.y);
     // Shift the mask to the lower right by contentOffset and cropView offset
     maskLayer.frame = CGRectOffset(maskLayer.frame, scaledXOffset + scaledCropViewX ,scaledYOffset + scaledCropViewY);
     
-    self.imageView.layer.mask = maskLayer;
+    self.scrollView.containerView.imageView.layer.mask = maskLayer;
 }
 
 #pragma mark UIScrollViewDelegate
@@ -236,18 +232,17 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [CATransaction setDisableActions:YES];
     [self adjustImageViewMaskLayer];
-   // [self adjustContainerView];
 }
 
 // Return the view that you want to zoom
 - (UIView*)viewForZoomingInScrollView:(UIScrollView *)scrollView {
-    return self.containerView;
+    return self.scrollView.containerView;
 }
 
 // The scroll view has zoomed, so you need to re-center the contents
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView {
-    [self adjustContainerView];
-    [self centerScrollViewContents];
+    [CATransaction setDisableActions:YES];
+    [self adjustImageViewMaskLayer];
 }
 
 #pragma mark Gestures
@@ -268,11 +263,11 @@
 // Zoom in when user double taps
 - (void)scrollViewDoubleTapped:(UITapGestureRecognizer*)recognizer {
     // 1
-    CGPoint pointInView = [recognizer locationInView:self.containerView];
+    CGPoint pointInView = [recognizer locationInView:self.scrollView.containerView];
     
     // 2
-    CGFloat newZoomScale = self.scrollView.zoomScale * 1.5f;
-    newZoomScale = MIN(newZoomScale, self.scrollView.maximumZoomScale);
+    CGFloat newZoomScale    = self.scrollView.zoomScale * 1.5f;
+    newZoomScale            = MIN(newZoomScale, self.scrollView.maximumZoomScale);
     
     // 3
     CGSize scrollViewSize = self.scrollView.bounds.size;
@@ -286,6 +281,8 @@
     
     // 4
     [self.scrollView zoomToRect:rectToZoomTo animated:YES];
+    [self adjustImageViewMaskLayer];
+
 }
 
 // Zoom out when user two finger taps

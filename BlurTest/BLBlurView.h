@@ -7,15 +7,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BLBlurView : UIView
-{
-    UIImageView *blurImageView;
-    
-}
+@interface BLBlurView : UIImageView
 
-@property (nonatomic, strong) UIImageView *blurImageView;
-
--(void) setImage:(UIImage *) image;
 - (id)initWithImage:(UIImage *)image;
 
 @end

@@ -25,6 +25,9 @@
 		410B38751863828500970B6A /* BLBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 410B38741863828500970B6A /* BLBlurView.m */; };
 		410B38781863842500970B6A /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 410B38761863842500970B6A /* CoreImage.framework */; };
 		410B38791863842500970B6A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 410B38771863842500970B6A /* QuartzCore.framework */; };
+		4D298FB81890FFF400956D31 /* BLScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D298FB71890FFF400956D31 /* BLScrollView.m */; };
+		4D298FBB1891175500956D31 /* BLContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D298FBA1891175500956D31 /* BLContainerView.m */; };
+		4D298FBE1891180100956D31 /* BLImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D298FBD1891180100956D31 /* BLImageView.m */; };
 		4DB1300C188A03A9004EB900 /* BLCropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB1300B188A03A9004EB900 /* BLCropView.m */; };
 /* End PBXBuildFile section */
 
@@ -39,11 +42,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		410B38381863824400970B6A /* BlurTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlurTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		410B38381863824400970B6A /* BLCropView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BLCropView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		410B383B1863824400970B6A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		410B383D1863824400970B6A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		410B383F1863824400970B6A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		410B38431863824400970B6A /* BlurTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BlurTest-Info.plist"; sourceTree = "<group>"; };
+		410B38431863824400970B6A /* BLCropView-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BLCropView-Info.plist"; sourceTree = "<group>"; };
 		410B38451863824400970B6A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		410B38471863824400970B6A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		410B38491863824400970B6A /* BlurTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BlurTest-Prefix.pch"; sourceTree = "<group>"; };
@@ -54,15 +57,21 @@
 		410B38531863824400970B6A /* BLCropViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLCropViewController.h; sourceTree = "<group>"; };
 		410B38541863824400970B6A /* BLCropViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLCropViewController.m; sourceTree = "<group>"; };
 		410B38561863824400970B6A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		410B385C1863824400970B6A /* BlurTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlurTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		410B385C1863824400970B6A /* BLCropViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BLCropViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		410B385D1863824400970B6A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		410B38651863824400970B6A /* BlurTestTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BlurTestTests-Info.plist"; sourceTree = "<group>"; };
+		410B38651863824400970B6A /* BLCropViewTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BLCropViewTests-Info.plist"; sourceTree = "<group>"; };
 		410B38671863824400970B6A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		410B38691863824400970B6A /* BlurTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlurTestTests.m; sourceTree = "<group>"; };
 		410B38731863828500970B6A /* BLBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLBlurView.h; sourceTree = "<group>"; };
 		410B38741863828500970B6A /* BLBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLBlurView.m; sourceTree = "<group>"; };
 		410B38761863842500970B6A /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		410B38771863842500970B6A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		4D298FB61890FFF400956D31 /* BLScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLScrollView.h; sourceTree = "<group>"; };
+		4D298FB71890FFF400956D31 /* BLScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLScrollView.m; sourceTree = "<group>"; };
+		4D298FB91891175500956D31 /* BLContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLContainerView.h; sourceTree = "<group>"; };
+		4D298FBA1891175500956D31 /* BLContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLContainerView.m; sourceTree = "<group>"; };
+		4D298FBC1891180100956D31 /* BLImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLImageView.h; sourceTree = "<group>"; };
+		4D298FBD1891180100956D31 /* BLImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLImageView.m; sourceTree = "<group>"; };
 		4DB1300A188A03A9004EB900 /* BLCropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLCropView.h; sourceTree = "<group>"; };
 		4DB1300B188A03A9004EB900 /* BLCropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCropView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -96,8 +105,8 @@
 		410B382F1863824400970B6A = {
 			isa = PBXGroup;
 			children = (
-				410B38411863824400970B6A /* BlurTest */,
-				410B38631863824400970B6A /* BlurTestTests */,
+				410B38411863824400970B6A /* BLCropView */,
+				410B38631863824400970B6A /* BLCropViewTests */,
 				410B383A1863824400970B6A /* Frameworks */,
 				410B38391863824400970B6A /* Products */,
 			);
@@ -106,8 +115,8 @@
 		410B38391863824400970B6A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				410B38381863824400970B6A /* BlurTest.app */,
-				410B385C1863824400970B6A /* BlurTestTests.xctest */,
+				410B38381863824400970B6A /* BLCropView.app */,
+				410B385C1863824400970B6A /* BLCropViewTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -125,7 +134,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		410B38411863824400970B6A /* BlurTest */ = {
+		410B38411863824400970B6A /* BLCropView */ = {
 			isa = PBXGroup;
 			children = (
 				4DB1300618872742004EB900 /* View Controller */,
@@ -133,6 +142,7 @@
 				410B38561863824400970B6A /* Images.xcassets */,
 				410B38421863824400970B6A /* Supporting Files */,
 			);
+			name = BLCropView;
 			path = BlurTest;
 			sourceTree = "<group>";
 		};
@@ -141,7 +151,7 @@
 			children = (
 				410B384A1863824400970B6A /* BLAppDelegate.h */,
 				410B384B1863824400970B6A /* BLAppDelegate.m */,
-				410B38431863824400970B6A /* BlurTest-Info.plist */,
+				410B38431863824400970B6A /* BLCropView-Info.plist */,
 				410B38441863824400970B6A /* InfoPlist.strings */,
 				410B38471863824400970B6A /* main.m */,
 				410B38491863824400970B6A /* BlurTest-Prefix.pch */,
@@ -149,19 +159,20 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		410B38631863824400970B6A /* BlurTestTests */ = {
+		410B38631863824400970B6A /* BLCropViewTests */ = {
 			isa = PBXGroup;
 			children = (
 				410B38691863824400970B6A /* BlurTestTests.m */,
 				410B38641863824400970B6A /* Supporting Files */,
 			);
+			name = BLCropViewTests;
 			path = BlurTestTests;
 			sourceTree = "<group>";
 		};
 		410B38641863824400970B6A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				410B38651863824400970B6A /* BlurTestTests-Info.plist */,
+				410B38651863824400970B6A /* BLCropViewTests-Info.plist */,
 				410B38661863824400970B6A /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -170,8 +181,14 @@
 		4DB1300518872734004EB900 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4D298FB61890FFF400956D31 /* BLScrollView.h */,
+				4D298FB71890FFF400956D31 /* BLScrollView.m */,
+				4D298FB91891175500956D31 /* BLContainerView.h */,
+				4D298FBA1891175500956D31 /* BLContainerView.m */,
 				410B38731863828500970B6A /* BLBlurView.h */,
 				410B38741863828500970B6A /* BLBlurView.m */,
+				4D298FBC1891180100956D31 /* BLImageView.h */,
+				4D298FBD1891180100956D31 /* BLImageView.m */,
 				4DB1300A188A03A9004EB900 /* BLCropView.h */,
 				4DB1300B188A03A9004EB900 /* BLCropView.m */,
 				410B384D1863824400970B6A /* Main_iPhone.storyboard */,
@@ -192,9 +209,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		410B38371863824400970B6A /* BlurTest */ = {
+		410B38371863824400970B6A /* BLCropView */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 410B386D1863824400970B6A /* Build configuration list for PBXNativeTarget "BlurTest" */;
+			buildConfigurationList = 410B386D1863824400970B6A /* Build configuration list for PBXNativeTarget "BLCropView" */;
 			buildPhases = (
 				410B38341863824400970B6A /* Sources */,
 				410B38351863824400970B6A /* Frameworks */,
@@ -204,14 +221,14 @@
 			);
 			dependencies = (
 			);
-			name = BlurTest;
+			name = BLCropView;
 			productName = BlurTest;
-			productReference = 410B38381863824400970B6A /* BlurTest.app */;
+			productReference = 410B38381863824400970B6A /* BLCropView.app */;
 			productType = "com.apple.product-type.application";
 		};
-		410B385B1863824400970B6A /* BlurTestTests */ = {
+		410B385B1863824400970B6A /* BLCropViewTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 410B38701863824400970B6A /* Build configuration list for PBXNativeTarget "BlurTestTests" */;
+			buildConfigurationList = 410B38701863824400970B6A /* Build configuration list for PBXNativeTarget "BLCropViewTests" */;
 			buildPhases = (
 				410B38581863824400970B6A /* Sources */,
 				410B38591863824400970B6A /* Frameworks */,
@@ -222,9 +239,9 @@
 			dependencies = (
 				410B38621863824400970B6A /* PBXTargetDependency */,
 			);
-			name = BlurTestTests;
+			name = BLCropViewTests;
 			productName = BlurTestTests;
-			productReference = 410B385C1863824400970B6A /* BlurTestTests.xctest */;
+			productReference = 410B385C1863824400970B6A /* BLCropViewTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -241,7 +258,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 410B38331863824400970B6A /* Build configuration list for PBXProject "BlurTest" */;
+			buildConfigurationList = 410B38331863824400970B6A /* Build configuration list for PBXProject "BLCropView" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -254,8 +271,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				410B38371863824400970B6A /* BlurTest */,
-				410B385B1863824400970B6A /* BlurTestTests */,
+				410B38371863824400970B6A /* BLCropView */,
+				410B385B1863824400970B6A /* BLCropViewTests */,
 			);
 		};
 /* End PBXProject section */
@@ -288,7 +305,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				410B38551863824400970B6A /* BLCropViewController.m in Sources */,
+				4D298FBB1891175500956D31 /* BLContainerView.m in Sources */,
+				4D298FB81890FFF400956D31 /* BLScrollView.m in Sources */,
 				410B38751863828500970B6A /* BLBlurView.m in Sources */,
+				4D298FBE1891180100956D31 /* BLImageView.m in Sources */,
 				410B384C1863824400970B6A /* BLAppDelegate.m in Sources */,
 				4DB1300C188A03A9004EB900 /* BLCropView.m in Sources */,
 				410B38481863824400970B6A /* main.m in Sources */,
@@ -308,7 +328,7 @@
 /* Begin PBXTargetDependency section */
 		410B38621863824400970B6A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 410B38371863824400970B6A /* BlurTest */;
+			target = 410B38371863824400970B6A /* BLCropView */;
 			targetProxy = 410B38611863824400970B6A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -429,9 +449,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BlurTest/BlurTest-Prefix.pch";
-				INFOPLIST_FILE = "BlurTest/BlurTest-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "BlurTest/BLCropView-Prefix.pch";
+				INFOPLIST_FILE = "BlurTest/BLCropView-Info.plist";
+				PRODUCT_NAME = BLCropView;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -442,9 +462,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BlurTest/BlurTest-Prefix.pch";
-				INFOPLIST_FILE = "BlurTest/BlurTest-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "BlurTest/BLCropView-Prefix.pch";
+				INFOPLIST_FILE = "BlurTest/BLCropView-Info.plist";
+				PRODUCT_NAME = BLCropView;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -465,8 +485,8 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "BlurTestTests/BlurTestTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "BlurTestTests/BLCropViewTests-Info.plist";
+				PRODUCT_NAME = BLCropViewTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -484,8 +504,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BlurTest/BlurTest-Prefix.pch";
-				INFOPLIST_FILE = "BlurTestTests/BlurTestTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "BlurTestTests/BLCropViewTests-Info.plist";
+				PRODUCT_NAME = BLCropViewTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -494,7 +514,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		410B38331863824400970B6A /* Build configuration list for PBXProject "BlurTest" */ = {
+		410B38331863824400970B6A /* Build configuration list for PBXProject "BLCropView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				410B386B1863824400970B6A /* Debug */,
@@ -503,7 +523,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		410B386D1863824400970B6A /* Build configuration list for PBXNativeTarget "BlurTest" */ = {
+		410B386D1863824400970B6A /* Build configuration list for PBXNativeTarget "BLCropView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				410B386E1863824400970B6A /* Debug */,
@@ -512,7 +532,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		410B38701863824400970B6A /* Build configuration list for PBXNativeTarget "BlurTestTests" */ = {
+		410B38701863824400970B6A /* Build configuration list for PBXNativeTarget "BLCropViewTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				410B38711863824400970B6A /* Debug */,
