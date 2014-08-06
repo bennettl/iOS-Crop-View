@@ -1,8 +1,8 @@
 #Tapiture Image Crop View
-### By Bennett Lee
+#### By Bennett Lee
 
 
-## Demo
+### Demo
 
 ![Alt text](demo.gif)
 
