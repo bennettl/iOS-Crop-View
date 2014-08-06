@@ -16,7 +16,7 @@
     self = [super initWithImage:image];
 
     if (self) {
-        self.backgroundColor = [UIColor orangeColor];
+        self.backgroundColor = [UIColor whiteColor];
         [self setContentMode:UIViewContentModeScaleAspectFill];
     }
     return self;
